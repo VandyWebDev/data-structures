@@ -14,7 +14,7 @@ class BinarySearchTree {
     let newTreeNode = new TreeNode(value);
     if (!this.root) {
       this.root = newTreeNode;
-      return this;
+      return true;
     }
     let currentNode = this.root;
     let valueInserted = false;
@@ -38,11 +38,30 @@ class BinarySearchTree {
     } // end of while
     return valueInserted;
   } // end of insert
+  find(value) {
+    if (!this.root) return false;
+    let currentNode = this.root;
+    while (currentNode) {
+      if (value === currentNode.value) {
+        return true;
+      }
+      if (value < currentNode.value) {
+        currentNode = currentNode.left;
+      } else {
+        currentNode = currentNode.right;
+      }
+    } // end of while
+    return false;
+  }
 }
 // test examples
 const bst = new BinarySearchTree();
+console.log(`5 found: ${bst.find(5)}`);
 bst.insert(15);
 bst.insert(55);
 bst.insert(5);
 bst.insert(10);
 console.dir(bst);
+console.log(`15 found: ${bst.find(15)}`);
+console.log(`85 found: ${bst.find(85)}`);
+console.log(`5 found: ${bst.find(5)}`);
